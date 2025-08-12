@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Configurar Médico</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Configurar Médico</h1>
+    <p><a href="{{ url_for('index') }}">Voltar</a></p>
+    <form method="POST">
+      <label>Nome do médico:</label><br>
+      <input type="text" name="nome_medico" value="{{ medico.nome_medico }}" required><br>
+      <label>CRM:</label><br>
+      <input type="text" name="crm_medico" value="{{ medico.crm_medico }}" required><br>
+      <label>Clínica:</label><br>
+      <input type="text" name="clinica" value="{{ medico.clinica }}" required><br>
+      <button type="submit">Salvar Configurações</button>
+    </form>
+  </div>
+</body>
+</html>

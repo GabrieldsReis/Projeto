@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Receita Médica</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🩺 Sistema de Receita Médica</h1>
+        </header>
+
+        <main>
+       <section class="flash-messages">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</section>
+
+            <form class="prescription-form" method="POST" action="/gerar-receita">
+                <div class="form-section">
+                    <h2>Configurar médico</h2>
+                    <div class="doctor-info">
+                        <!-- Aqui viriam campos do médico (pode ser preenchido automaticamente) -->
+                        <p>Dr. Exemplo</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="patient-name">Nome do paciente:</label>
+                    <input type="text" id="patient-name" name="patient_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="symptoms">Sintomas (ex: dor de cabeça, febre):</label>
+                    <textarea id="symptoms" name="symptoms" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="observations">Observações:</label>
+                    <textarea id="observations" name="observations" rows="3"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Buscar Receita / Gerar PDF</button>
+                </div>
+
+                <div class="form-footer">
+                    <p>Se a receita já existir no sistema, será baixado um PDF pronto. Caso não exista, você será levado a uma tela para cadastrar a receita.</p>
+                </div>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
