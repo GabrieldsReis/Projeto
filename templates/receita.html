@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receita</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Receita Encontrada</h1>
+    <p>{{ receita }}</p>
+    <a href="/gerar_pdf/{{ request.args.get('sintomas', '') }}">📄 Baixar PDF</a>
+    <a href="/">⬅ Voltar</a>
+</body>
+</html>
