@@ -79,6 +79,8 @@ def index():
     if request.method == "POST":
         paciente = request.form.get("paciente","").strip()
         sintomas = request.form.get("sintomas","").strip()
+
+                print(f"Dados recebidos - Paciente: {paciente}, Sintomas: {sintomas}");
         if not paciente or not sintomas:
             flash("Preencha paciente e sintomas.", "warning")
             return redirect(url_for('index'))
@@ -86,11 +88,24 @@ def index():
         receita = buscar_receita(sintomas)
         if receita:
             # gerar PDF e enviar como download
-            pdf_buf = gerar_pdf_receita(paciente, receita, medico.get("nome_medico",""), medico.get("crm_medico",""), medico.get("clinica",""))
-            return send_file(pdf_buf, as_attachment=True, download_name="receituario.pdf", mimetype="application/pdf")
+            pdf_buf = gerar_pdf_receita(
+                paciente
+                , receita
+                , medico.get("nome_medico",""),
+                  medico.get("crm_medico",""),
+                  medico.get("clinica","")
+                  )
+            return send_file(pdf_buf, 
+                             as_attachment=True, 
+                             download_name="receituario.pdf",
+                             mimetype="application/pdf")
         else:
             # redirecionar para página de cadastro de receita com dados preservados
-            return render_template("add_receita.html", paciente=paciente, sintomas=sintomas, medico=medico)
+            return render_template(
+                "add_receita.html",
+                  paciente=paciente,
+                  sintomas=sintomas,
+                 medico=medico)
     return render_template("index.html", medico=medico)
 
 @app.route("/salvar_receita", methods=["POST"])
