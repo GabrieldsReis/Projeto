@@ -3,7 +3,7 @@ import datetime, os, json, io
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.secret_key = 'troque-esta-chave-para-producao'
 
 ARQUIVO_BASE = "receitas.txt"
@@ -80,7 +80,7 @@ def index():
         paciente = request.form.get("paciente","").strip()
         sintomas = request.form.get("sintomas","").strip()
 
-                print(f"Dados recebidos - Paciente: {paciente}, Sintomas: {sintomas}");
+        
         if not paciente or not sintomas:
             flash("Preencha paciente e sintomas.", "warning")
             return redirect(url_for('index'))
